@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Propagetion and Delegate</title>
+</head>
+<body>
+
+    <ul id="list-container">
+        <li class="items">Lorem, ipsum dolor.</li>
+        <li id="items-2" class="items">Esse, obcaecati fugiat!</li>
+        <li class="items">Voluptatum, velit dolores?</li>
+        <li class="items">Quam, aperiam ipsam?</li>
+    </ul>
+
+    <button id="addNewBtn">Add New</button>
+    
+    <script>
+        // --------------propagation---------
+        // ----------------------------------
+        // const items2 = document.getElementById('items-2');
+        // items2.addEventListener('click', function(event){
+        //     console.log(event.target.innerText);
+        //     event.stopPropagation();
+        // })
+
+        // document.getElementById('list-container').addEventListener('click', function(){
+        //     console.log('parent container of list items');
+        // })
+        // document.addEventListener('click', function(){
+        //     console.log('Body calling propagation');
+        // })
+
+
+        // -------------Delegate-------------
+        // -----------------------------------
+        const listContainer = document.getElementById('list-container');
+
+        // ------------It's working but when i added new item than new item not removed------
+        // const items = document.getElementsByClassName('items');
+        
+        // for(const item of items){
+        //     item.addEventListener('click', function(event){
+        //         event.target.parentNode.removeChild(event.target)
+        //     })
+        // }
+
+        // -----------It's Fully Worked-----
+        listContainer.addEventListener('click', function(event){
+            event.target.parentNode.removeChild(event.target);
+        })
+
+
+        const addNewBtn = document.getElementById('addNewBtn');
+        addNewBtn.addEventListener('click', function(){
+            const li = document.createElement('li');
+
+            li.innerText = 'Brand New Items';
+            li.classList.add('items');
+
+            listContainer.appendChild(li);
+        })
+    </script>
+</body>
+</html>
